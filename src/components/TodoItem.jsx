@@ -1,15 +1,24 @@
 import React from 'react'
 import { FaTrash } from "react-icons/fa";
 import { TodoUpdate } from './TodoUpdate'
-export const TodoItem = () => {
+export const TodoItem = ({
+  todo,
+  handleUpdateTodo,
+  handleDeleteTodo,
+  handleCompleteTodo
+}) => {
   return (
   <li>
-    <span>
+    <span  onclick={()=>handleCompleteTodo(todo.id)}>
+     
         <label htmlFor="" className='container-done'></label>
     </span>
 
-    <TodoUpdate/>
-    <button className='btn-delete'>< FaTrash/> </button>
+    <TodoUpdate todo={todo} handleUpdateTodo={handleUpdateTodo}/>
+    <button className='btn-delete' 
+    onClick={()=>handleDeleteTodo(todo.id)}>
+      < FaTrash/> 
+      </button>
   </li>
   )
 }
