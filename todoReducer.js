@@ -7,12 +7,23 @@ case 'Add Todo':
 
 
     case 'Delete Todo':
-return  initialState.filter(todo=>todo.id !== action.payload.id)
+return  initialState.filter(todo=>todo.id !== action.payload)
 
     case 'Complete Todo':
-
+        return initialState.map(todo=>{
+            if(todo.id === action.payload){
+                return {...todo,done:!todo.done}
+            }
+            return todo
+        }) 
 
     case 'update Todo':
+       return initialState.map( todo=>{
+        if(todo.id===action.payload){
+            return {...todo,description:!todo.description}
+        }
+        return todo
+       })
 
     default:
         return initialState;
