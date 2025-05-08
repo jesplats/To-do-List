@@ -11,11 +11,14 @@ export const TodoItem = ({
   <li>
     <span  onclick={()=>handleCompleteTodo(todo.id)}>
      
-        <label htmlFor="" className='container-done'></label>
+        <label 
+        htmlFor=''
+        className= {`container-done ${todo.done ?'active':''}`}></label>
     </span>
 
     <TodoUpdate todo={todo} handleUpdateTodo={handleUpdateTodo}/>
-    <button className='btn-delete' 
+    <button 
+    className='btn-delete' 
     onClick={()=>handleDeleteTodo(todo.id)}>
       < FaTrash/> 
       </button>

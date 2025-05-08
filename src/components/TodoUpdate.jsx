@@ -2,12 +2,14 @@ import React from 'react'
 import { useState } from 'react'
 import { FaEdit } from "react-icons/fa";
 import { useForm } from '../hooks/useForm'
+import { useRef } from 'react';
+
 export const TodoUpdate = ({todo,handleUpdateTodo}) => {
-  
-  const {updateDescription,onInputChange}=useForm({
+    const {updateDescription,onInputChange}=useForm({
     updateDescription:todo.description
   })
 
+  const focusInputRef=useRef();
 
   const [disable, setdisable] = useState(true)
 
@@ -20,16 +22,23 @@ export const TodoUpdate = ({todo,handleUpdateTodo}) => {
     const description = updateDescription; // Cambiado de coma a punto y coma
   
     handleUpdateTodo(id, description);
+
+    setdisable(!disable)
+    focusInputRef.current.focus(); // Cambiado de coma a punto y coma
   };
   
   return (
     <form onSubmit={onSubmitUpdate}>
      <input type="text" 
-      className="input-update" 
-      value={todo.description} 
-      onChange={onInputChange}
-      name='updateDescription'
+      className={`input-update ${ 
+        todo.done ? ' text-decoration-dashed' : '' 
+       } `}   
+       name='updateDescription'            
+      value={updateDescription} 
       placeholder="Agregar tarea"
+      onChange={onInputChange}
+      readOnly={disable}
+      ref={focusInputRef} // Cambiado de coma a punto y coma
       />
     
 
